@@ -20,8 +20,8 @@ defmodule Request do
 
   defp parse_content(content) do
     case content do
-      {:ok, %HTTPoison.Response{body: body, status_code: status_code, request_url: request_url}} ->
-        {:ok, status_code, request_url, body}
+      {:ok, %HTTPoison.Response{body: body, status_code: status_code, request_url: request_url, headers: headers}} ->
+        {:ok, status_code, request_url, body, headers}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:ok, "Error parsing #{reason}"}
       _ ->

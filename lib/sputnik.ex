@@ -13,6 +13,6 @@ defmodule Sputnik do
 
   """
   def start(url) do
-    Page.start(url)
+    Queue.start(url)
   end
 end
