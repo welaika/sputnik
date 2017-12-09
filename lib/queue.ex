@@ -1,18 +1,16 @@
 defmodule Queue do
 
   def start(url, query) do
-    spawn __MODULE__, :loop, [url, query]
+    spawn __MODULE__, :init, [url, query]
   end
 
-  def loop(url, query) do
+  def init(url, query) do
     Page.start(url, query, self())
     %URI{host: host} = URI.parse(url)
     loop(host, [url], [], query)
   end
 
-  defp loop(domain, [], done, _) do
-    Stats.show(done)
-  end
+  defp loop(domain, [], done, _), do: Stats.show(done)
 
   defp loop(domain, processing, done, query) do
     receive do
@@ -21,6 +19,10 @@ defmodule Queue do
         {processing} = enqueue(links, processing, done, domain, query)
         IO.write "."
         loop(domain, processing, done, query)
+      {:error, error} ->
+        IO.puts "Error: #{IO.inspect(error)}"
+      _ ->
+        raise "Unknown message"
     end
   end
 
@@ -31,17 +33,18 @@ defmodule Queue do
   end
 
   defp enqueue(links, processing, done, domain, query) do
-    parsed_done = Enum.map(done, fn({_, url, _}) -> url end)
-    filtered_links = Enum.filter(links, (fn(link) -> same_domain(link, domain) end))
-                      |> Enum.filter(fn(link) -> !Enum.member?(processing, link) end)
-                      |> Enum.filter(fn(link) -> !Enum.member?(parsed_done, link) end)
+    done_urls = Enum.map(done, fn({_, url, _}) -> url end) ++ processing
+    filtered_links = select_same_domain_links(links, domain) -- done_urls
     Enum.each filtered_links, (fn(link) -> Page.start(link, query, self()) end)
-    processing = processing ++ filtered_links
-    {processing}
+    {processing ++ filtered_links}
   end
 
   defp same_domain(link, domain) do
     %URI{host: host} = URI.parse(link)
     host == domain
+  end
+
+  defp select_same_domain_links(links, domain) do
+    Enum.filter(links, (fn(link) -> same_domain(link, domain) end))
   end
 end

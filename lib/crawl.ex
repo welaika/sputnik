@@ -7,16 +7,16 @@ defmodule Crawl do
     parse(body, request_url)
   end
 
+  def parse(body, request_url, pid) do
+    links = parse(body, request_url)
+    send pid, {:ok, links}
+  end
+
   defp parse(body, request_url) do
     find_links(body)
       |> Enum.map(fn (link) -> parse_url(request_url, link) end)
       |> Enum.filter(fn (item) -> item != nil end)
       |> Enum.uniq
-  end
-
-  def parse(body, request_url, pid) do
-    links = parse(body, request_url)
-    send pid, {:ok, links}
   end
 
   defp find_links(body) do

@@ -1,9 +1,9 @@
 defmodule Page do
   def start(url, query, queue_pid) do
-    spawn __MODULE__, :loop, [url, query, queue_pid]
+    spawn __MODULE__, :init, [url, query, queue_pid]
   end
 
-  def loop(url, query, queue_pid) do
+  def init(url, query, queue_pid) do
     Request.start(url, self())
     loop(query, queue_pid)
   end
@@ -17,14 +17,18 @@ defmodule Page do
         result = Parse.start(body, query)
         send queue_pid, {:ok, status_code, request_url, links, result}
       {:ok, error} ->
-        IO.puts "OK error: #{error}"
+        send queue_pid, {:error, error}
       {:error, error} ->
-        IO.puts "Error error: #{error}"
+        send queue_pid, {:error, error}
+      _ ->
+        raise "Unknown message"
     end
   end
 
   defp header_location(headers) do
-    {_, location} = Enum.find(headers, (fn(item) -> Tuple.to_list(item) |> Enum.member?("Location") end))
+    {_, location} = Enum.find(headers, (fn(item) ->
+                      Tuple.to_list(item) |> Enum.member?("Location")
+                    end))
     location
   end
 end
