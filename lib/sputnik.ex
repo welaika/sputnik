@@ -12,7 +12,7 @@ defmodule Sputnik do
       :world
 
   """
-  def start(url) do
-    Queue.start(url)
+  def start(url, queries \\ []) do
+    Queue.start(url, queries)
   end
 end

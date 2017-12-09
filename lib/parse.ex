@@ -1,29 +1,20 @@
 defmodule Parse do
-  def start(body, request_url, pid) do
-    spawn __MODULE__, :parse, [body, request_url, pid]
+  def start(body, queries, pid) do
+    spawn __MODULE__, :parse, [body, queries, pid]
   end
 
-  def parse(body, request_url, pid) do
-    links = find_links(body)
-              |> Enum.map(fn (link) -> parse_url(request_url, link) end)
-              |> Enum.filter(fn (item) -> item != nil end)
-              |> Enum.uniq
-    send pid, {:ok, links}
+  def start(body, queries) do
+    parse(body, queries)
   end
 
-  defp find_links(body) do
-    Floki.find(body, "a")
-      |> Floki.attribute("href")
+  def parse(body, queries) do
+    Enum.reduce(queries, %{}, fn(q, acc) ->
+      items = Floki.find(body, q)
+      Map.put(acc, q, Enum.count(items))
+    end)
   end
 
-  defp parse_url(request_url, link) do
-    URI.merge(request_url, link)
-      |> uri_to_string
+  def parse(body, queries, pid) do
+    send pid, parse(body, queries)
   end
-
-  defp uri_to_string(%URI{scheme: scheme} = url) when scheme in ["https", "http"] do
-    to_string(url)
-  end
-
-  defp uri_to_string(%URI{scheme: _scheme}), do: nil
 end

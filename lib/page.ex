@@ -1,33 +1,25 @@
 defmodule Page do
-  def start(url, queue_pid) do
-    spawn __MODULE__, :loop, [url, queue_pid]
+  def start(url, query, queue_pid) do
+    spawn __MODULE__, :loop, [url, query, queue_pid]
   end
 
-  def loop(url, queue_pid) do
+  def loop(url, query, queue_pid) do
     Request.start(url, self())
-    loop(queue_pid)
+    loop(query, queue_pid)
   end
 
-  defp loop(queue_pid) do
+  defp loop(query, queue_pid) do
     receive do
       {:ok, status_code, request_url, body, headers} when status_code in 300..399 ->
-        send queue_pid, {:ok, status_code, request_url, [header_location(headers)]}
+        send queue_pid, {:ok, status_code, request_url, [header_location(headers)], %{}}
       {:ok, status_code, request_url, body, _} ->
-        Parse.start(body, request_url, self())
-        loop(:ok, status_code, request_url, body, queue_pid)
+        links = Crawl.start(body, request_url)
+        result = Parse.start(body, query)
+        send queue_pid, {:ok, status_code, request_url, links, result}
       {:ok, error} ->
         IO.puts "OK error: #{error}"
       {:error, error} ->
         IO.puts "Error error: #{error}"
-    end
-  end
-
-  defp loop(:ok, status_code, request_url, body, queue_pid) do
-    receive do
-      {:ok, links} ->
-        send queue_pid, {:ok, status_code, request_url, links}
-      _ ->
-        send queue_pid, {:error}
     end
   end
 
