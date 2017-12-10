@@ -6,3 +6,33 @@
 body {
   margin-top: 120px;
 }
+
+.card {
+  position: relative;
+}
+.card a {
+  color: #2c3e50;
+  display: block;
+  width: 100%;
+}
+
+.card a:hover {
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.card a:visited {
+  color: #2c3e50;
+}
+
+.card a:active {
+  color: #2c3e50;
+}
+
+.card .badge {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #2c3e50;
+}
