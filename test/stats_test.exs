@@ -43,7 +43,7 @@ defmodule StatsTest do
   end
 
     test "returns min/max for each tag", state do
-      assert Stats.min_max_queries(state[:done]) == %{"a" => {2, 4}, "p" => {1, 6}}
+      assert Stats.min_max_queries(state[:done]) == %{"a" => %{min: 2, max: 4}, "p" => %{min: 1, max: 6}}
     end
   end
 end

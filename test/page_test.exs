@@ -44,7 +44,7 @@ defmodule PageTest do
           "https://httpbin.org/links/3/2"
         ],
         %{"a" => 2}
-      }, 1_000
+      }, 2_000
     end
   end
 
@@ -65,7 +65,7 @@ defmodule PageTest do
         "https://httpbin.org/status/404",
         [],
         %{}
-      }, 1_000
+      }, 2_000
     end
   end
 
@@ -86,7 +86,7 @@ defmodule PageTest do
         "https://httpbin.org/status/500",
         [],
         %{}
-      }, 1_000
+      }, 2_000
     end
   end
 end
