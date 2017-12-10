@@ -16,10 +16,10 @@ defmodule Stats do
                           Map.put(acc, status_code, urls)
                         end)
 
-    {:ok, file} = File.open "static/report.json", [:write]
+    {:ok, file} = File.open "static/report_data.js", [:write]
     file_content = %{status_codes: status_codes, queries: counter_queries(done), min_max: min_max_queries(done)}
                      |> Poison.encode!
-    IO.binwrite file, file_content
+    IO.binwrite file, "var report_data = #{file_content};"
     File.close file
 
     case :os.type() do
