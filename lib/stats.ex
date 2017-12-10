@@ -1,7 +1,6 @@
 defmodule Stats do
   def show(done) do
     IO.puts "\n\n"
-    IO.inspect done
     print_status_codes(done)
     IO.puts "\n"
     print_queries_counters(done)
