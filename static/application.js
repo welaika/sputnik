@@ -1,3 +1,14 @@
+var get_report_target = function() {
+ var statuses = report_data.status_codes;
+ for (code in statuses) {
+   var url = statuses[code].length && statuses[code][0];
+   var link = document.createElement('a');
+   link.href = url;
+   return link.protocol + '//' + link.hostname;
+ }
+ return null;
+};
+
 var make_status_code_series = function() {
  var statuses = report_data.status_codes;
  var counts = [];
@@ -15,6 +26,12 @@ var make_status_code_series = function() {
  }
  return series;
 };
+
+var report_target = get_report_target();
+if (report_target) {
+  var header = document.getElementById("header");
+  header.innerHTML = header.innerHTML + ' for ' + report_target;
+}
 
 Highcharts.chart('status_codes_chart', {
   chart: {
