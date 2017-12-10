@@ -1,4 +1,4 @@
-![](https://github.com/spawnfest/sputnik/blob/master/static/sputnik_logo.png)
+![](https://github.com/spawnfest/sputnik/blob/master/static/sputnik_logo_mini.png)
 
 # Sputnik
 by weLaika
@@ -57,6 +57,10 @@ Min 0 result(s) per page
 Max 31 result(s) per page
 
 ```
+
+and it opens the browser with a page like this
+
+![](https://github.com/spawnfest/sputnik/blob/gh-pages/assets/screenshot.png)
 
 ## Requirements
 
