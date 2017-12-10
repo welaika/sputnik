@@ -10,7 +10,7 @@ defmodule Page do
 
   defp loop(query, queue_pid) do
     receive do
-      {:ok, status_code, request_url, body, headers} when status_code in 300..399 ->
+      {:ok, status_code, request_url, _, headers} when status_code in 300..399 ->
         send queue_pid, {:ok, status_code, request_url, [header_location(headers)], %{}}
       {:ok, status_code, request_url, body, _} ->
         links = Crawl.start(body, request_url)
