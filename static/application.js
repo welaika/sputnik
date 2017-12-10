@@ -156,3 +156,17 @@ Highcharts.chart('queries_chart', {
   },
   series: make_query_series()
 });
+
+var dump_pages = function() {
+  var pages = document.getElementById("pages");
+  for (code in report_data.status_codes) {
+    var txt = '<div class="card"><div class="card-header list-group-item d-flex justify-content-between align-items-center" role="tab"><h5 class="mb-0"><a data-toggle="collapse" href="#content' + code + '">Status code: ' + code + '</a><span class="badge badge-primary badge-pill align-right">'+ report_data.status_codes[code].length +'</span></h5></div><div id="content' + code + '" class="collapse" role="tabpanel" data-parent="#pages"><div class="card-body">';
+    for (var i=0; i < report_data.status_codes[code].length; i++) {
+      var url = report_data.status_codes[code][i];
+      txt += '<p>'+ url +'</p>'
+    }
+    txt += '</div></div></div>';
+    pages.insertAdjacentHTML('beforeend', txt);
+  }
+};
+dump_pages();
