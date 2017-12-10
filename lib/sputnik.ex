@@ -1,22 +1,12 @@
 defmodule Sputnik do
-  @moduledoc """
-  Documentation for Sputnik.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Sputnik.hello
-      :world
-
-  """
   def start(url, queries \\ []) do
     Greetings.start
     Queue.start(url, queries, self())
     receive do
-      {:ok, _} -> nil
+      {:ok, done} -> Stats.show(done)
+      _ ->
+        raise "Unknown message"
+        Greetings.error
     end
   end
 

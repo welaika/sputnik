@@ -63,3 +63,11 @@ Max 31 result(s) per page
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/sputnik](https://hexdocs.pm/sputnik).
+
+## Testing
+
+To run tests:
+
+```bash
+$ mix text --cover
+```
