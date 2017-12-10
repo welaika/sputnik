@@ -22,6 +22,7 @@ defmodule Page do
         send queue_pid, {:error, error}
       _ ->
         raise "Unknown message"
+        Greetings.error
     end
   end
 

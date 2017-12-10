@@ -3,6 +3,8 @@ defmodule Stats do
     IO.puts ""
     print_status_codes(done)
     print_queries_counters(done)
+    IO.puts "\n"
+    Greetings.byebye
   end
 
   defp print_queries_counters(done) do

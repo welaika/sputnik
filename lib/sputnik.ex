@@ -13,6 +13,7 @@ defmodule Sputnik do
 
   """
   def start(url, queries \\ []) do
+    Greetings.start
     Queue.start(url, queries)
   end
 end
