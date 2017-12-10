@@ -3,11 +3,18 @@ defmodule Request do
     spawn __MODULE__, :get, [url, pid]
   end
 
-  def get(url, pid) do
+  def start(url) do
+    get(url)
+  end
+
+  def get(url) do
     start_http_client()
     result = get_url_content(url)
                |> parse_content
-    send pid, result
+  end
+
+  def get(url, pid) do
+    send pid, get(url)
   end
 
   defp start_http_client do
