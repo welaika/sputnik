@@ -13,20 +13,22 @@ defmodule Stats do
   end
 
   def counter_queries(done) do
-    Enum.map(done, fn({_, _, q}) -> q end)
+    done
+      |> Enum.map(fn({_, _, q}) -> q end)
       |> Enum.reduce(%{}, fn(result, acc) ->
            Map.merge(acc, result, fn(_, old, new) -> old + new end)
          end)
   end
 
   def min_max_queries(done) do
-    Enum.map(done, fn({_, _, q}) -> q end)
+    done
+      |> Enum.map(fn({_, _, q}) -> q end)
       |> Enum.map(fn(item) -> Map.keys(item) end)
       |> List.flatten
       |> Enum.uniq
       |> Enum.map(fn(key) ->
-           counters = Enum.map(done, fn({_, _, item}) -> item[key] end) |> Enum.filter(& &1)
-           %{key => { Enum.min(counters), Enum.max(counters)}}
+           counters = done |> Enum.map(fn({_, _, item}) -> item[key] end) |> Enum.filter(& &1)
+           %{key => {Enum.min(counters), Enum.max(counters)}}
          end)
       |> Enum.reduce(%{}, fn(result, acc) ->
            Map.merge(acc, result, fn(_, old, new) -> old + new end)
@@ -37,7 +39,8 @@ defmodule Stats do
   defp queries_report(counters, min_max_queries) do
     IO.puts decorate_title('Queries')
 
-    Map.keys(counters)
+    counters
+      |> Map.keys
       |> Enum.each(fn(query) ->
            IO.puts "## query `#{query}` ##"
            IO.puts "#{counters[query]} result(s)"
@@ -52,7 +55,8 @@ defmodule Stats do
     IO.puts "Pages found: #{Enum.count(done)}"
     map = Enum.group_by(done, fn({status_code, _, _}) -> status_code end)
 
-    Map.keys(map)
+    map
+      |> Map.keys
       |> Enum.sort
       |> Enum.each(fn(status_code) ->
         IO.puts "status_code #{status_code}: #{Enum.count(map[status_code])}"

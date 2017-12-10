@@ -27,9 +27,11 @@ defmodule Page do
   end
 
   defp header_location(headers) do
-    {_, location} = Enum.find(headers, (fn(item) ->
-                      Tuple.to_list(item) |> Enum.member?("Location")
-                    end))
+    {_, location} =
+      headers 
+      |> Enum.find(
+        (fn(item) -> item |> Tuple.to_list |> Enum.member?("Location") end)
+      )
     location
   end
 end

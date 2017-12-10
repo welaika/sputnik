@@ -13,19 +13,22 @@ defmodule Crawl do
   end
 
   defp parse(body, request_url) do
-    find_links(body)
+    body
+      |> find_links
       |> Enum.map(fn (link) -> parse_url(request_url, link) end)
       |> Enum.filter(fn (item) -> item != nil end)
       |> Enum.uniq
   end
 
   defp find_links(body) do
-    Floki.find(body, "a")
+    body
+      |> Floki.find("a")
       |> Floki.attribute("href")
   end
 
   defp parse_url(request_url, link) do
-    URI.merge(request_url, link)
+    request_url
+      |> URI.merge(link)
       |> uri_to_string
   end
 

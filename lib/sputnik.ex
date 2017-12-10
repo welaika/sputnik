@@ -16,9 +16,8 @@ defmodule Sputnik do
   end
 
   defp find_queries(collection) do
-    Enum.filter(collection, fn(element) ->
-      match?({:query, _}, element)
-    end)
+    collection
+      |> Enum.filter(fn(element) -> match?({:query, _}, element) end)
       |> Enum.map(fn({_, query}) -> query end)
   end
 

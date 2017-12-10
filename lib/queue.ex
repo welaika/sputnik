@@ -21,7 +21,7 @@ defmodule Queue do
         IO.write "."
         loop(domain, processing, done, query)
       {:error, error} ->
-        IO.puts "Error: #{IO.inspect(error)}"
+        IO.puts "Error!: #{error}"
         Greetings.error
       _ ->
         raise "Unknown message"
