@@ -16,7 +16,7 @@ defmodule Sputnik do
     Greetings.start
     Queue.start(url, queries, self())
     receive do
-      {:ok, _} -> nil
+      {:ok, done} -> Stats.show(done)
     end
   end
 
