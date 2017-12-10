@@ -1,13 +1,14 @@
 defmodule Queue do
 
-  def start(url, query) do
-    spawn __MODULE__, :init, [url, query]
+  def start(url, query, sputnik_pid) do
+    spawn __MODULE__, :init, [url, query, sputnik_pid]
   end
 
-  def init(url, query) do
+  def init(url, query, sputnik_pid) do
     Page.start(url, query, self())
     %URI{host: host} = URI.parse(url)
     loop(host, [url], [], query)
+    send sputnik_pid, {:ok, "Bye!"}
   end
 
   defp loop(domain, [], done, _), do: Stats.show(done)
