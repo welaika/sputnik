@@ -1,4 +1,4 @@
-![](https://github.com/spawnfest/sputnik/blob/master/sputnik_logo.png)
+![](https://github.com/spawnfest/sputnik/blob/master/static/sputnik_logo.png)
 
 # Sputnik
 by weLaika
