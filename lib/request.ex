@@ -1,20 +1,53 @@
 defmodule Request do
+  @moduledoc """
+  This module wraps a http client
+  """
+
+  @doc """
+  Asyncronously returns the following informations from the given url to the pid:
+
+    - page body
+    - request status code
+    - request url
+    - headers
+
+  ## Parameters
+
+    - `url`: the URL to fetch via HTTP client
+    - `pid`: the pid which will receive the output
+
+  """
   def start(url, pid) do
     spawn __MODULE__, :get, [url, pid]
   end
 
+  @doc """
+  Returns the following informations from the given url to the pid:
+
+    - page body
+    - request status code
+    - request url
+    - headers
+
+  ## Parameters
+
+    - `url`: the URL to fetch via HTTP client
+
+  """
   def start(url) do
     get(url)
   end
 
-  def get(url) do
-    start_http_client()
-    get_url_content(url)
-      |> parse_content
-  end
-
+  @doc false
   def get(url, pid) do
     send pid, get(url)
+  end
+
+  defp get(url) do
+    start_http_client()
+    url
+      |> get_url_content
+      |> parse_content
   end
 
   defp start_http_client do

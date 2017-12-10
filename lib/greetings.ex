@@ -1,4 +1,6 @@
 defmodule Greetings do
+  @moduledoc false
+
   def start do
     IO.puts(
       "

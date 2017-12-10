@@ -1,7 +1,5 @@
 defmodule PageTest do
   use ExUnit.Case
-  doctest Page
-
 
   describe "Page.start/3 - when url returns a 3XX" do
     setup do
