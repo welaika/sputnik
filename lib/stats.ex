@@ -8,18 +8,18 @@ defmodule Stats do
     Greetings.byebye
   end
 
-  defp print_queries_counters(done) do
+  def print_queries_counters(done) do
     queries_report(counter_queries(done), min_max_queries(done))
   end
 
-  defp counter_queries(done) do
+  def counter_queries(done) do
     Enum.map(done, fn({_, _, q}) -> q end)
       |> Enum.reduce(%{}, fn(result, acc) ->
            Map.merge(acc, result, fn(_, old, new) -> old + new end)
          end)
   end
 
-  defp min_max_queries(done) do
+  def min_max_queries(done) do
     Enum.map(done, fn({_, _, q}) -> q end)
       |> Enum.map(fn(item) -> Map.keys(item) end)
       |> List.flatten
