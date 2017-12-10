@@ -8,7 +8,9 @@ defmodule Sputnik.Mixfile do
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       escript: [main_module: Sputnik],
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
     ]
   end
 
@@ -23,7 +25,8 @@ defmodule Sputnik.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.13.0"},
-      {:floki, "~> 0.19.1"}
+      {:floki, "~> 0.19.1"},
+      {:excoveralls, "~> 0.7", only: :test}
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
   end
