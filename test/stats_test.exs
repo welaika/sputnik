@@ -1,7 +1,6 @@
 defmodule StatsTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
-  doctest Stats
 
   setup do
     {

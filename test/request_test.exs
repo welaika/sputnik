@@ -1,6 +1,5 @@
 defmodule RequestTest do
   use ExUnit.Case
-  doctest Request
 
   describe "Request.start/1 - when status code is 200" do
     setup do

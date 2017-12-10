@@ -18,7 +18,7 @@ defmodule Sputnik.Mixfile do
       homepage_url: "https://dev.welaika.com",
       docs: [
         main: "Sputnik", # The main page in the docs
-        logo: "static/sputnik_logo.png",
+        logo: "static/sputnik_logo_w.png",
         extras: ["README.md"]
       ]
 

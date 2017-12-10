@@ -72,6 +72,12 @@ To run tests:
 $ mix text --cover
 ```
 
+To run credo:
+
+```bash
+$ mix credo
+```
+
 ## Documentation
 
 To generate the documentation:

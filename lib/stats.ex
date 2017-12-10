@@ -1,4 +1,6 @@
 defmodule Stats do
+  @moduledoc false
+
   def show(done) do
     IO.puts "\n\n"
     print_status_codes(done)

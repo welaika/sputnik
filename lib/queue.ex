@@ -1,9 +1,31 @@
 defmodule Queue do
+  @moduledoc """
+  This module crawls all pages and returns a list of pages as tuples.
 
+  The crawler will never go outside of the given URL host.
+  """
+
+  @doc """
+  Asyncronously crawls all page linked from the initial URL.
+
+  It returns a list of tuples, each tuple containing:
+
+    - status code
+    - page url
+    - map with CSS selectors and their count
+
+  ## Parameters
+
+    - `url`: the initial URL to crawl
+    - `query`: list of valid CSS selectors as strings
+    - `sputnik_pid`: the pid which will receive the output
+
+  """
   def start(url, query, sputnik_pid) do
     spawn __MODULE__, :init, [url, query, sputnik_pid]
   end
 
+  @doc false
   def init(url, query, sputnik_pid) do
     Page.start(url, query, self())
     %URI{host: host} = URI.parse(url)

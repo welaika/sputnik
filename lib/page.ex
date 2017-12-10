@@ -1,8 +1,25 @@
 defmodule Page do
+  @moduledoc """
+  This module fetches and parses a given URL.
+  """
+
+  @doc """
+  Asyncronously fetches a given URL. It parses the body and sends back to Queue
+  the list of links to follow. It parses the body and counts how many CSS selectors
+  there are in the page
+
+  ## Parameters
+
+    - `url`: the initial URL to crawl
+    - `query`: list of valid CSS selectors as strings
+    - `queue_pid`: the pid which will receive the output
+
+  """
   def start(url, query, queue_pid) do
     spawn __MODULE__, :init, [url, query, queue_pid]
   end
 
+  @doc false
   def init(url, query, queue_pid) do
     Request.start(url, self())
     loop(query, queue_pid)
