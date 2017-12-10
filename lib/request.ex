@@ -47,7 +47,7 @@ defmodule Request do
     start_http_client()
     url
       |> get_url_content
-      |> parse_content
+      |> parse_content(url)
   end
 
   defp start_http_client do
@@ -58,12 +58,12 @@ defmodule Request do
     HTTPoison.get url
   end
 
-  defp parse_content(content) do
+  defp parse_content(content, url) do
     case content do
       {:ok, %HTTPoison.Response{body: body, status_code: status_code, request_url: request_url, headers: headers}} ->
         {:ok, status_code, request_url, body, headers}
       {:error, %HTTPoison.Error{reason: reason}} ->
-        {:ok, "Error parsing #{reason}"}
+        {:ok, url, "Error parsing #{reason}"}
       _ ->
         {:error, "Something went wrong"}
     end

@@ -42,12 +42,14 @@ defmodule Queue do
         {processing} = enqueue(links, processing, done, domain, query)
         IO.write "."
         loop(domain, processing, done, query)
-      {:error, error} ->
-        IO.puts "Error!: #{error}"
-        Greetings.error
+      {:error, url, _error} ->
+        IO.write "x"
+        # NOTE: when we get an error from HTTPoison, we use the status code 999
+        {processing, done} = set_as_done(url, processing, done, 999, %{})
+        loop(domain, processing, done, query)
       _ ->
-        raise "Unknown message"
         Greetings.error
+        raise "Unknown message"
     end
   end
 
