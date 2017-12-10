@@ -20,3 +20,5 @@ erl_crash.dump
 *.ez
 
 sputnik
+
+static/report.json
