@@ -21,8 +21,8 @@ defmodule RequestTest do
     end
 
     test "send the request's content", state do
-      {:ok, status_code, url, body, headers} = Request.start(state[:url])
-      location = Enum.filter(headers, fn({name, value}) -> name == "Location" end )
+      {:ok, status_code, url, _, headers} = Request.start(state[:url])
+      location = Enum.filter(headers, fn({name, _}) -> name == "Location" end )
       assert status_code == 302
       assert url == "https://httpbin.org/absolute-redirect/1"
       assert location == [{"Location", "http://httpbin.org/get"}]

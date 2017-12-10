@@ -7,11 +7,11 @@ defmodule Queue do
   def init(url, query, sputnik_pid) do
     Page.start(url, query, self())
     %URI{host: host} = URI.parse(url)
-    loop(host, [url], [], query)
-    send sputnik_pid, {:ok, "Bye!"}
+    done = loop(host, [url], [], query)
+    send sputnik_pid, {:ok, done}
   end
 
-  defp loop(domain, [], done, _), do: Stats.show(done)
+  defp loop(_, [], done, _), do: done
 
   defp loop(domain, processing, done, query) do
     receive do

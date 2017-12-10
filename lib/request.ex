@@ -9,8 +9,8 @@ defmodule Request do
 
   def get(url) do
     start_http_client()
-    result = get_url_content(url)
-               |> parse_content
+    get_url_content(url)
+      |> parse_content
   end
 
   def get(url, pid) do
