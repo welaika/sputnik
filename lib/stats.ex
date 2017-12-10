@@ -12,11 +12,13 @@ defmodule Stats do
   end
 
   defp produce_json(done) do
-    status_codes = Enum.group_by(done, fn({status_code, _, _}) -> status_code end)
-                     |> Enum.reduce(%{}, fn({status_code, items}, acc) ->
-                          urls = Enum.map(items, fn({_, url, _}) -> url end)
-                          Map.put(acc, status_code, urls)
-                        end)
+    status_codes =
+      done
+      |> Enum.group_by(fn({status_code, _, _}) -> status_code end)
+      |> Enum.reduce(%{}, fn({status_code, items}, acc) ->
+           urls = Enum.map(items, fn({_, url, _}) -> url end)
+           Map.put(acc, status_code, urls)
+         end)
 
     {:ok, file} = File.open "static/report_data.js", [:write]
     file_content = %{status_codes: status_codes, queries: counter_queries(done), min_max: min_max_queries(done)}
