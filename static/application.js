@@ -33,6 +33,48 @@ if (report_target) {
   header.innerHTML = header.innerHTML + ' for ' + report_target;
 }
 
+Highcharts.theme = {
+    colors: ['#2980b9', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#e67e22', '#6AF9C4'],
+    chart: {
+        backgroundColor: {
+            color: 'white',
+            stops: [
+                [0, 'rgb(255, 255, 255)'],
+                [1, 'rgb(240, 240, 255)']
+            ]
+        },
+    },
+    title: {
+        style: {
+            color: '#2c3e50',
+            font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+        }
+    },
+    subtitle: {
+        style: {
+            color: '#2c3e50',
+            font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+        }
+    },
+    labels: {
+      style: {
+        color: '#2c3e50'
+      }
+    },
+    legend: {
+        itemStyle: {
+            font: '9pt Trebuchet MS, Verdana, sans-serif',
+            color: '#2c3e50'
+        },
+        itemHoverStyle:{
+            color: 'gray'
+        }
+    }
+};
+
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
+
 Highcharts.chart('status_codes_chart', {
   chart: {
     plotBackgroundColor: null,
@@ -54,7 +96,7 @@ Highcharts.chart('status_codes_chart', {
         enabled: true,
         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
         style: {
-          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+          color: 'black'
         }
       }
     }
@@ -82,8 +124,6 @@ var make_query_series = function() {
   for(var i = 0; i < categories.length; i++) {
     var category = categories[i];
     acc.total.push(report_data.queries[category]);
-    console.log(report_data.min_max);
-    console.log(category);
     acc.min.push(report_data.min_max[category]['min']);
     acc.max.push(report_data.min_max[category]['max']);
   }
