@@ -19,7 +19,7 @@ defmodule CrawlTest do
   describe "Crawl.start/3" do
     test "returns a tuple with a list of links from a given body to pid", state do
       Crawl.start(state[:body], state[:request_url], self())
-      assert_receive { :ok, ["https://dev.welaika.com/pippo.html"] }, 1_000
+      assert_receive {:ok, ["https://dev.welaika.com/pippo.html"]}, 1_000
     end
   end
 end

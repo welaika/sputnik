@@ -71,3 +71,17 @@ To run tests:
 ```bash
 $ mix text --cover
 ```
+
+To run credo:
+
+```bash
+$ mix credo
+```
+
+## Documentation
+
+To generate the documentation:
+
+```bash
+$ mix docs && open doc/index.html
+```

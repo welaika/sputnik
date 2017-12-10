@@ -1,7 +1,6 @@
 defmodule SputnikTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
-  doctest Sputnik
 
   describe "Sputnik.start/2" do
     setup do
