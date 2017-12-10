@@ -3,19 +3,28 @@
 <head>
  <meta charset="utf-8">
   <link href="bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+  <link href="application.css" rel="stylesheet" type="text/css" media="all">
+  <script src="https://code.highcharts.com/highcharts.src.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-      <img src="sputnik_logo.png" class="img-fluid" />
-      </div>
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+      <span class="navbar-brand">Sputnik
+      </span>
     </div>
-    <div class="row charts">
-        <div id="status_codes_chart"></div>
-	    <div id="queries_chart"></div>
+  </div>
+  <div class="container py-4">
+    <div class="row charts py-4">
+        <div id="status_codes_chart" class="col-lg-6"></div>
+        <div id="queries_chart" class="col-lg-6"></div>
+    </div>
+    <div class="row py-4">
+      <div class="col-lg-5"></div>
+      <div class="col-lg-2">
+        <p class="text-muted">Powered by</p>
+        <img src="sputnik_logo.png" class="img-fluid" />
       </div>
+      <div class="col-lg-5"></div>
     </div>
   </div>
   <script src="report_data.js"></script>
