@@ -1,4 +1,11 @@
 defmodule Sputnik do
+  @moduledoc """
+  This is the main entrance for the Sputnik program
+  """
+
+  @doc """
+  startone!!
+  """
   def start(url, queries \\ []) do
     Greetings.start
     Queue.start(url, queries, self())
@@ -26,7 +33,7 @@ defmodule Sputnik do
     exit(1)
   end
 
-  def parse_args(args) do
+  defp parse_args(args) do
     parsed = OptionParser.parse(args,
       strict: [
         query: [:string, :keep]

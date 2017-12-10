@@ -71,3 +71,11 @@ To run tests:
 ```bash
 $ mix text --cover
 ```
+
+## Documentation
+
+To generate the documentation:
+
+```bash
+$ mix docs && open doc/index.html
+```
