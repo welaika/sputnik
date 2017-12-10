@@ -3,17 +3,20 @@ by weLaika
 
 **TODO: Add description**
 
-## Installation
+## Build
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `sputnik` to your list of dependencies in `mix.exs`:
+Sputnik can be built with:
 
-```elixir
-def deps do
-  [
-    {:sputnik, "~> 0.1.0"}
-  ]
-end
+```
+mix escript.build
+```
+
+## Usage
+
+Sputnik takes the url to crawl and optional uqery to perform on the crawled pages:
+
+```
+sputnik [--query <Q> --query <Q1> ...] <url>
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
