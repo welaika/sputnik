@@ -7,6 +7,7 @@ defmodule Sputnik.Mixfile do
       version: "0.1.0",
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
+      escript: [main_module: Sputnik],
       deps: deps()
     ]
   end
