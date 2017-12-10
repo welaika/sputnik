@@ -11,7 +11,7 @@ defmodule Queue do
     send sputnik_pid, {:ok, done}
   end
 
-  defp loop(domain, [], done, _), do: done
+  defp loop(_, [], done, _), do: done
 
   defp loop(domain, processing, done, query) do
     receive do
