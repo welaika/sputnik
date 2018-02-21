@@ -14,6 +14,7 @@ With query flags you can pass one ore more css selector to produce pages report 
 Sputnik can be built with:
 
 ```
+mix get.deps
 mix escript.build
 ```
 
