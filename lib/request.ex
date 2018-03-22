@@ -61,7 +61,15 @@ defmodule Request do
   defp parse_content(content, url) do
     case content do
       {:ok, %HTTPoison.Response{body: body, status_code: status_code, request_url: request_url, headers: headers}} ->
-        {:ok, status_code, request_url, body, headers}
+        is_html = case List.keyfind(headers, "Content-Type", 0) do
+          nil ->
+            false
+          {_, content_type} ->
+            String.match?(content_type, ~r/\btext\/html\b/)
+          _ ->
+            false
+        end
+        {:ok, status_code, request_url, body, headers, is_html}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:ok, url, "Error parsing #{reason}"}
       _ ->
