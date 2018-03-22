@@ -11,12 +11,15 @@ defmodule Sputnik.Mixfile do
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
-
-      #docs
       name: "Sputnik",
-      licenses: ["MIT"],
-      maintainers: ["Filippo Gangi Dino", "Riccardo Magliocchetti", "Fabrizio Monti", "Stefano Pau"],
       source_url: "https://github.com/spawnfest/sputnik",
+      description: "Sputnik is a website crawler written in Elixir.",
+      package: [
+        name: "Sputnik",
+        maintainers: ["Filippo Gangi Dino", "Riccardo Magliocchetti", "Fabrizio Monti", "Stefano Pau"],
+        licenses: ["MIT"],
+        links: %{"GitHub" => "https://github.com/welaika/sputnik"}
+      ],
       homepage_url: "https://dev.welaika.com",
       docs: [
         main: "Sputnik", # The main page in the docs
