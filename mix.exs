@@ -15,7 +15,7 @@ defmodule Sputnik.Mixfile do
       source_url: "https://github.com/spawnfest/sputnik",
       description: "Sputnik is a website crawler written in Elixir.",
       package: [
-        name: "Sputnik",
+        name: "sputnik",
         maintainers: ["Filippo Gangi Dino", "Riccardo Magliocchetti", "Fabrizio Monti", "Stefano Pau"],
         licenses: ["MIT"],
         links: %{"GitHub" => "https://github.com/welaika/sputnik"}
