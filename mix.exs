@@ -14,6 +14,8 @@ defmodule Sputnik.Mixfile do
 
       #docs
       name: "Sputnik",
+      licenses: ["MIT"],
+      maintainers: ["Filippo Gangi Dino", "Riccardo Magliocchetti", "Fabrizio Monti", "Stefano Pau"],
       source_url: "https://github.com/spawnfest/sputnik",
       homepage_url: "https://dev.welaika.com",
       docs: [
@@ -21,7 +23,6 @@ defmodule Sputnik.Mixfile do
         logo: "static/sputnik_logo_w.png",
         extras: ["README.md"]
       ]
-
     ]
   end
 
