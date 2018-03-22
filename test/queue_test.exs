@@ -11,7 +11,7 @@ defmodule QueueTest do
     end
 
     test "crawls all pages and returns a list of pages as tuples", state do
-      Queue.start(state[:url], state[:query], self())
+      Queue.start(state[:url], state[:query], [], self())
       assert_receive {:ok, result}, 5_000
       assert(
         Enum.sort_by(result, fn({_, url, _}) -> url end) ==

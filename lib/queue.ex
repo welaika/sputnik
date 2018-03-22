@@ -18,52 +18,61 @@ defmodule Queue do
 
     - `url`: the initial URL to crawl
     - `query`: list of valid CSS selectors as strings
+    - `options`: Keyword list of options like `[{:connections, 10}]`
     - `sputnik_pid`: the pid which will receive the output
 
   """
-  def start(url, query, sputnik_pid) do
-    spawn __MODULE__, :init, [url, query, sputnik_pid]
+  def start(url, query, options, sputnik_pid) do
+    spawn __MODULE__, :init, [url, query, options, sputnik_pid]
   end
 
   @doc false
-  def init(url, query, sputnik_pid) do
+  def init(url, query, options, sputnik_pid) do
     Page.start(url, query, self())
     %URI{host: host} = URI.parse(url)
-    done = loop(host, [url], [], query)
+    done = loop(host, [], [url], [], query, options)
     send sputnik_pid, {:ok, done}
   end
 
-  defp loop(_, [], done, _), do: done
+  defp loop(_, [], [], done, _, _), do: done
 
-  defp loop(domain, processing, done, query) do
+  defp loop(domain, to_do, processing, done, query, options) do
     receive do
       {:ok, status_code, request_url, links, result} ->
-        {processing, done} = set_as_done(request_url, processing, done, status_code, result)
-        {processing} = enqueue(links, processing, done, domain, query)
+        {to_do, processing, done} = set_as_done(request_url, to_do, processing, done, status_code, result)
+        {to_do} = enqueue(links, to_do, processing, done, domain, query)
+        {to_do, processing} = fill_processing(to_do, processing, query, options)
         IO.write "."
-        loop(domain, processing, done, query)
+        loop(domain, to_do, processing, done, query, options)
       {:error, url, _error} ->
         IO.write "x"
         # NOTE: when we get an error from HTTPoison, we use the status code 999
-        {processing, done} = set_as_done(url, processing, done, 999, %{})
-        loop(domain, processing, done, query)
+        {to_do, processing, done} = set_as_done(url, to_do, processing, done, 999, %{})
+        loop(domain, to_do, processing, done, query, options)
       _ ->
         Greetings.error
         raise "Unknown message"
     end
   end
 
-  defp set_as_done(request_url, processing, done, status_code, result) do
+  defp set_as_done(request_url, to_do, processing, done, status_code, result) do
     done = done ++ [{status_code, request_url, result}]
     processing = processing -- [request_url]
-    {processing, done}
+    to_do = to_do -- [request_url]
+    {to_do, processing, done}
   end
 
-  defp enqueue(links, processing, done, domain, query) do
-    done_urls = Enum.map(done, fn({_, url, _}) -> url end) ++ processing
+  defp enqueue(links, to_do, processing, done, domain, query) do
+    done_urls = Enum.map(done, fn({_, url, _}) -> url end) ++ processing ++ to_do
     filtered_links = select_same_domain_links(links, domain) -- done_urls
-    Enum.each filtered_links, (fn(link) -> Page.start(link, query, self()) end)
-    {processing ++ filtered_links}
+    {to_do ++ filtered_links}
+  end
+
+  defp fill_processing(to_do, processing, query, options) do
+    urls_amount = (options[:connections] || 10) - Enum.count(processing)
+    to_be_processing = Enum.take(to_do, urls_amount)
+    Enum.each to_be_processing, (fn(link) -> Page.start(link, query, self()) end)
+    {to_do -- to_be_processing, processing ++ to_be_processing}
   end
 
   defp same_domain(link, domain) do

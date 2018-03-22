@@ -22,8 +22,13 @@ mix escript.build
 
 Sputnik takes the url to crawl and optional query to perform on the crawled pages:
 
+### Options
+
+- query: valid css selectors, separated by commas, that you want to analyze all over the website
+- connections: max number of concurrent HTTP connections (default is 10)
+
 ```
-sputnik [--query <Q> --query <Q1> ...] <url>
+sputnik [--query <Q> --query <Q1> ...] [--connections <N>] <url>
 ```
 
 ## Examples
@@ -31,7 +36,7 @@ sputnik [--query <Q> --query <Q1> ...] <url>
 running
 
 ```
-./sputnik "http://spawnfest.github.io" --query "div" --query "a" --query "h1,h2,h3,h4,h5,h6"
+./sputnik "http://spawnfest.github.io" --query "div" --query "a" --query "h1,h2,h3,h4,h5,h6" --connections 10
 ```
 
 produces the following output
@@ -74,7 +79,7 @@ be found at [https://hexdocs.pm/sputnik](https://hexdocs.pm/sputnik).
 To run tests:
 
 ```bash
-$ mix text --cover
+$ mix test --cover
 ```
 
 To run credo:
