@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>Sputnik – Sputnik v0.1.0</title>
+    <title>Sputnik – Sputnik v0.2.0</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items-afa023c5ef.js"></script>
+    <script src="dist/sidebar_items-54652f8680.js"></script>
     
     
     
@@ -31,7 +31,7 @@
         Sputnik
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.1.0
+        v0.2.0
       </h2>
     </div>
     
@@ -67,7 +67,7 @@
 
 
       <h1>
-        <small class="visible-xs">Sputnik v0.1.0</small>
+        <small class="visible-xs">Sputnik v0.2.0</small>
         Sputnik
         
           <a href="https://github.com/spawnfest/sputnik/blob/master/lib/sputnik.ex#L1" title="View Source" class="view-source" rel="help">
@@ -112,7 +112,7 @@ meant to be used directly</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#start/2">start(url, queries \\ [])</a>
+    <a href="#start/3">start(url, queries \\ [], options \\ [])</a>
   </div>
   
     <div class="summary-synopsis"><p>Crawls a url and prints out the report</p>
@@ -149,7 +149,7 @@ meant to be used directly</p>
     </a>
     <span class="signature">main(args)</span>
     
-      <a href="https://github.com/spawnfest/sputnik/blob/master/lib/sputnik.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/spawnfest/sputnik/blob/master/lib/sputnik.ex#L41" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -162,23 +162,25 @@ meant to be used directly</p>
 meant to be used directly.</p>
 <pre><code class="bash"># inside the project folder
 $ mix escript.build
-$ ./sputnik &quot;http://spawnfest.github.io&quot; --query &quot;a&quot; --query &quot;h1,h2,h3&quot;</code></pre>
+$ ./sputnik &quot;http://spawnfest.github.io&quot; --query &quot;a&quot; --query &quot;h1,h2,h3&quot; --connections 10</code></pre>
 
   </section>
 </div>
-<div class="detail" id="start/2">
+<div class="detail" id="start/3">
   
   
     <span id="start/1"></span>
   
+    <span id="start/2"></span>
+  
   <div class="detail-header">
-    <a href="#start/2" class="detail-link" title="Link to this function">
+    <a href="#start/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">start(url, queries \\ [])</span>
+    <span class="signature">start(url, queries \\ [], options \\ [])</span>
     
-      <a href="https://github.com/spawnfest/sputnik/blob/master/lib/sputnik.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/spawnfest/sputnik/blob/master/lib/sputnik.ex#L20" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -188,8 +190,8 @@ $ ./sputnik &quot;http://spawnfest.github.io&quot; --query &quot;a&quot; --query
   </div>
   <section class="docstring">
     <p>Crawls a url and prints out the report.</p>
-<h2 id="start/2-parameters" class="section-heading">
-  <a href="#start/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h2 id="start/3-parameters" class="section-heading">
+  <a href="#start/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Parameters
 </h2>
 
@@ -198,13 +200,15 @@ $ ./sputnik &quot;http://spawnfest.github.io&quot; --query &quot;a&quot; --query
 </li>
 <li><code class="inline">queries</code>: List of valid CSS selectors a strings
 </li>
+<li><code class="inline">options</code>: Keyword list of options like <code class="inline">[{:connections, 10}]</code>
+</li>
 </ul>
-<h2 id="start/2-examples" class="section-heading">
-  <a href="#start/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h2 id="start/3-examples" class="section-heading">
+  <a href="#start/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
 
-<pre><code class="iex elixir">iex&gt; Sputnik.start(&quot;https://spawnfest.github.io&quot;, [&quot;a&quot;, &quot;h1,h2,h3&quot;])</code></pre>
+<pre><code class="iex elixir">iex&gt; Sputnik.start(&quot;https://spawnfest.github.io&quot;, [&quot;a&quot;, &quot;h1,h2,h3&quot;], [{:connections, 10}])</code></pre>
 
   </section>
 </div>

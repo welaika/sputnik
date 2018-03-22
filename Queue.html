@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>Queue – Sputnik v0.1.0</title>
+    <title>Queue – Sputnik v0.2.0</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items-afa023c5ef.js"></script>
+    <script src="dist/sidebar_items-54652f8680.js"></script>
     
     
     
@@ -31,7 +31,7 @@
         Sputnik
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.1.0
+        v0.2.0
       </h2>
     </div>
     
@@ -67,7 +67,7 @@
 
 
       <h1>
-        <small class="visible-xs">Sputnik v0.1.0</small>
+        <small class="visible-xs">Sputnik v0.2.0</small>
         Queue
         
           <a href="https://github.com/spawnfest/sputnik/blob/master/lib/queue.ex#L1" title="View Source" class="view-source" rel="help">
@@ -103,7 +103,7 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#start/3">start(url, query, sputnik_pid)</a>
+    <a href="#start/4">start(url, query, options, sputnik_pid)</a>
   </div>
   
     <div class="summary-synopsis"><p>Asyncronously crawls all page linked from the initial URL</p>
@@ -130,17 +130,17 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="start/3">
+          <div class="detail" id="start/4">
   
   
   <div class="detail-header">
-    <a href="#start/3" class="detail-link" title="Link to this function">
+    <a href="#start/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">start(url, query, sputnik_pid)</span>
+    <span class="signature">start(url, query, options, sputnik_pid)</span>
     
-      <a href="https://github.com/spawnfest/sputnik/blob/master/lib/queue.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/spawnfest/sputnik/blob/master/lib/queue.ex#L25" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -159,8 +159,8 @@
 <li>map with CSS selectors and their count
 </li>
 </ul>
-<h2 id="start/3-parameters" class="section-heading">
-  <a href="#start/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h2 id="start/4-parameters" class="section-heading">
+  <a href="#start/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Parameters
 </h2>
 
@@ -168,6 +168,8 @@
 <li><code class="inline">url</code>: the initial URL to crawl
 </li>
 <li><code class="inline">query</code>: list of valid CSS selectors as strings
+</li>
+<li><code class="inline">options</code>: Keyword list of options like <code class="inline">[{:connections, 10}]</code>
 </li>
 <li><code class="inline">sputnik_pid</code>: the pid which will receive the output
 </li>

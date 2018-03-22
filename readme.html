@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>Sputnik – Sputnik v0.1.0</title>
+    <title>Sputnik – Sputnik v0.2.0</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items-afa023c5ef.js"></script>
+    <script src="dist/sidebar_items-54652f8680.js"></script>
     
     
     
@@ -31,7 +31,7 @@
         Sputnik
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.1.0
+        v0.2.0
       </h2>
     </div>
     
@@ -66,7 +66,7 @@
     <div id="content" class="content-inner">
 
 
-<p><img src="https://github.com/spawnfest/sputnik/blob/master/static/sputnik_logo.png" alt=""/></p>
+<p><img src="https://github.com/spawnfest/sputnik/blob/master/static/sputnik_logo_mini.png" alt=""/></p>
 <h1>Sputnik</h1>
 <p>by weLaika</p>
 <p>Sputnik is a website crawler written in Elixir.</p>
@@ -78,21 +78,33 @@
 </h2>
 
 <p>Sputnik can be built with:</p>
-<pre><code class="elixir">mix escript.build</code></pre>
+<pre><code class="elixir">mix get.deps
+mix escript.build</code></pre>
 <h2 id="usage" class="section-heading">
   <a href="#usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Usage
 </h2>
 
 <p>Sputnik takes the url to crawl and optional query to perform on the crawled pages:</p>
-<pre><code class="elixir">sputnik [--query &lt;Q&gt; --query &lt;Q1&gt; ...] &lt;url&gt;</code></pre>
+<h3 id="options" class="section-heading">
+  <a href="#options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h3>
+
+<ul>
+<li>query: valid css selectors, separated by commas, that you want to analyze all over the website
+</li>
+<li>connections: max number of concurrent HTTP connections (default is 10)
+</li>
+</ul>
+<pre><code class="elixir">sputnik [--query &lt;Q&gt; --query &lt;Q1&gt; ...] [--connections &lt;N&gt;] &lt;url&gt;</code></pre>
 <h2 id="examples" class="section-heading">
   <a href="#examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
 
 <p>running</p>
-<pre><code class="elixir">./sputnik &quot;http://spawnfest.github.io&quot; --query &quot;div&quot; --query &quot;a&quot; --query &quot;h1,h2,h3,h4,h5,h6&quot;</code></pre>
+<pre><code class="elixir">./sputnik &quot;http://spawnfest.github.io&quot; --query &quot;div&quot; --query &quot;a&quot; --query &quot;h1,h2,h3,h4,h5,h6&quot; --connections 10</code></pre>
 <p>produces the following output</p>
 <pre><code class="elixir">#################### Pages ####################
 Pages found: 19
@@ -114,6 +126,8 @@ Max 53 result(s) per page
 Min 0 result(s) per page
 Max 31 result(s) per page
 </code></pre>
+<p>and it opens the browser with a page like this</p>
+<p><img src="https://github.com/spawnfest/sputnik/blob/gh-pages/assets/screenshot.png" alt=""/></p>
 <h2 id="requirements" class="section-heading">
   <a href="#requirements" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Requirements
@@ -128,7 +142,7 @@ be found at <a href="https://hexdocs.pm/sputnik">https://hexdocs.pm/sputnik</a>.
 </h2>
 
 <p>To run tests:</p>
-<pre><code class="bash">$ mix text --cover</code></pre>
+<pre><code class="bash">$ mix test --cover</code></pre>
 <p>To run credo:</p>
 <pre><code class="bash">$ mix credo</code></pre>
 <h2 id="documentation" class="section-heading">
