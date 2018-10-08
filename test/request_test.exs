@@ -25,7 +25,7 @@ defmodule RequestTest do
       location = Enum.filter(headers, fn({name, _}) -> name == "Location" end )
       assert status_code == 302
       assert url == "https://httpbin.org/absolute-redirect/1"
-      assert location == [{"Location", "http://httpbin.org/get"}]
+      assert location == [{"Location", "https://httpbin.org/get"}]
       assert is_html == true
     end
   end
