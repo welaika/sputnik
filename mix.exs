@@ -41,7 +41,7 @@ defmodule Sputnik.Mixfile do
     [
       {:httpoison, "~> 0.13.0"},
       {:floki, "~> 0.19.1"},
-      {:poison, "~> 3.1"},
+      {:poison, "~> 4.0"},
       {:excoveralls, "~> 0.7", only: :test},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false}
