@@ -95,3 +95,8 @@ To generate the documentation:
 ```bash
 $ mix docs && open doc/index.html
 ```
+
+## Releasing
+
+Bump the version in `mix.exs`, commit && push, and run `mix hex.publish`
+Please read [https://hex.pm/docs/publish](https://hex.pm/docs/publish) for help.
