@@ -62,7 +62,7 @@ defmodule Queue do
     {to_do, processing, done}
   end
 
-  defp enqueue(links, to_do, processing, done, domain, query) do
+  defp enqueue(links, to_do, processing, done, domain, _query) do
     done_urls = Enum.map(done, fn({_, url, _}) -> url end) ++ processing ++ to_do
     filtered_links = select_same_domain_links(links, domain) -- done_urls
     {to_do ++ filtered_links}

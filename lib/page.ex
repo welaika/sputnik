@@ -33,7 +33,7 @@ defmodule Page do
         links = Crawl.start(body, request_url)
         result = Parse.start(body, query)
         send queue_pid, {:ok, status_code, request_url, links, result}
-      {:ok, status_code, request_url, body, headers, _is_html} ->
+      {:ok, status_code, request_url, _body, _headers, _is_html} ->
         send queue_pid, {:ok, status_code, request_url, [], %{}}
       {:ok, url, error} ->
         send queue_pid, {:error, url, error}
