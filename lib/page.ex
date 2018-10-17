@@ -49,7 +49,7 @@ defmodule Page do
     {_, location} =
       headers 
       |> Enum.find(
-        (fn(item) -> item |> Tuple.to_list |> Enum.member?("Location") end)
+        (fn {key, _val} -> String.downcase(key) == "location" end)
       )
     location
   end
