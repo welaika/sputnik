@@ -16,7 +16,7 @@ defmodule PageTest do
         :ok,
         302,
         "https://httpbin.org/absolute-redirect/1",
-        ["http://httpbin.org/get"],
+        ["https://httpbin.org/get"],
         %{}
       }, 1_000
     end
