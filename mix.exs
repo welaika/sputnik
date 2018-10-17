@@ -10,7 +10,7 @@ defmodule Sputnik.Mixfile do
       escript: [main_module: Sputnik],
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
       name: "Sputnik",
       source_url: "https://github.com/spawnfest/sputnik",
       description: "Sputnik is a website crawler written in Elixir.",
