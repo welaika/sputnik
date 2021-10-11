@@ -39,7 +39,7 @@ defmodule Sputnik.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 0.13.0"},
+      {:httpoison, "~> 1.0.0"},
       {:floki, "~> 0.19.1"},
       {:poison, "~> 4.0"},
       {:excoveralls, "~> 0.7", only: :test},
